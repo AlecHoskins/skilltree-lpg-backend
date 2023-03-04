@@ -1,0 +1,4 @@
+13:17:46.734 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+13:17:46.942 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
+13:18:16.308 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - skilltree-lpg-backend-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 134ms, init: 0ms
+13:18:16.441 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace skilltree-lpg-backend-default-rtdb status Active to Active
