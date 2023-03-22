@@ -101,6 +101,17 @@
 					</excludes>
 				</configuration>
 			</plugin>
+		<!--google hosting-->
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<configuration>
+					<version>1</version>
+					<projectId>skilltree-lpg-backend</projectId>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
