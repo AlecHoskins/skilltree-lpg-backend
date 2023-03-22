@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +39,6 @@ public class AuthenticationServices implements IAuthenticationServices {
                 .roles(roles)
                 .build();
         userServices.create(user);
-
         var jwtToken = jwtServices.generateToken(user);
         return null;
     }
@@ -49,12 +47,11 @@ public class AuthenticationServices implements IAuthenticationServices {
     public AuthenticationResponse authenticate(AuthenticationRequest request)  {
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
-        var user = userServices.findByUsername(request.getEmail());
-        /*TODO Change to username*/
+        var user = userServices.findByUsername(request.getUsername());
         var jwtToken = jwtServices.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
