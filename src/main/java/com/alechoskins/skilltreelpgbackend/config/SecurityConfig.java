@@ -1,7 +1,7 @@
 package com.alechoskins.skilltreelpgbackend.config;
 
 import com.alechoskins.skilltreelpgbackend.database.repository.firebase.repository.User.UserRepository;
-import com.alechoskins.skilltreelpgbackend.security.Endpoints;
+import com.alechoskins.skilltreelpgbackend.global.Endpoints;
 import com.alechoskins.skilltreelpgbackend.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

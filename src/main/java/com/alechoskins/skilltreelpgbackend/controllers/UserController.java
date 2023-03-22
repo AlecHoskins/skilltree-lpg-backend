@@ -1,14 +1,10 @@
 package com.alechoskins.skilltreelpgbackend.controllers;
 
 import com.alechoskins.skilltreelpgbackend.database.pojos.User;
-import com.alechoskins.skilltreelpgbackend.security.AbstractAuthConst;
-import com.alechoskins.skilltreelpgbackend.security.Endpoints;
+import com.alechoskins.skilltreelpgbackend.global.Endpoints;
 import com.alechoskins.skilltreelpgbackend.services.Users.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.ExecutionException;
 
 @RestController
 public class UserController {

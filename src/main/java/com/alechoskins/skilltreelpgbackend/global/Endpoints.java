@@ -1,4 +1,4 @@
-package com.alechoskins.skilltreelpgbackend.security;
+package com.alechoskins.skilltreelpgbackend.global;
 
 public class Endpoints {
 

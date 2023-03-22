@@ -1,7 +1,7 @@
 package com.alechoskins.skilltreelpgbackend.services.Authentication;
 
 import com.alechoskins.skilltreelpgbackend.database.pojos.User;
-import com.alechoskins.skilltreelpgbackend.security.Role;
+import com.alechoskins.skilltreelpgbackend.global.AppEnums;
 import com.alechoskins.skilltreelpgbackend.security.dto.AuthenticationRequest;
 import com.alechoskins.skilltreelpgbackend.security.dto.AuthenticationResponse;
 import com.alechoskins.skilltreelpgbackend.security.dto.RegisterRequest;
@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -31,8 +30,8 @@ public class AuthenticationServices implements IAuthenticationServices {
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
-        var roles = new ArrayList<Role>();
-        roles.add(Role.USER);
+        var roles = new ArrayList<AppEnums.Role>();
+        roles.add(AppEnums.Role.USER);
         var user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
@@ -42,7 +41,7 @@ public class AuthenticationServices implements IAuthenticationServices {
                 .build();
         userServices.create(user);
 
-        var jwtToken = jwtServices.generateToken((UserDetails) user);
+        var jwtToken = jwtServices.generateToken(user);
         return null;
     }
 

@@ -1,12 +1,12 @@
 package com.alechoskins.skilltreelpgbackend.database.pojos;
 
-import com.alechoskins.skilltreelpgbackend.security.Role;
+import com.alechoskins.skilltreelpgbackend.global.AppEnums;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -18,13 +18,13 @@ public class User implements UserDetails {
     private String password;
     private String email;
     private boolean isActive;
-    private List<Role> roles;
+    private ArrayList<AppEnums.Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(roles != null){
             return roles.stream().map(
-                    x -> new SimpleGrantedAuthority( x.name() )
+                    x -> new SimpleGrantedAuthority( x.getValue() )
             ).toList();
         }
         return null;

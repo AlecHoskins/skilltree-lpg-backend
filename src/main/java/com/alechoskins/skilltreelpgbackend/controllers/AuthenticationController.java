@@ -1,17 +1,14 @@
 package com.alechoskins.skilltreelpgbackend.controllers;
 
-import com.alechoskins.skilltreelpgbackend.security.Endpoints;
+import com.alechoskins.skilltreelpgbackend.global.Endpoints;
 import com.alechoskins.skilltreelpgbackend.security.dto.AuthenticationRequest;
 import com.alechoskins.skilltreelpgbackend.security.dto.AuthenticationResponse;
-import com.alechoskins.skilltreelpgbackend.security.dto.RegisterRequest;
 import com.alechoskins.skilltreelpgbackend.services.Authentication.IAuthenticationServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.PermitAll;
 import javax.security.sasl.AuthenticationException;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequiredArgsConstructor
