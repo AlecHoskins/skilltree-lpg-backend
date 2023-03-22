@@ -32,12 +32,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NotNull HttpServletResponse response,
             @NotNull FilterChain filterChain
     ) throws ServletException, IOException {
-        var HEADER_NAMES = request.getHeaderNames();
-        var METHOD = request.getMethod();
-        var requestURL = request.getRequestURL();
-        var requestUri = request.getRequestURI();
-        var query = request.getQueryString();
-
         final String authenticationHeader = request.getHeader("Authorization");
         final String token;
         final String userEmail;

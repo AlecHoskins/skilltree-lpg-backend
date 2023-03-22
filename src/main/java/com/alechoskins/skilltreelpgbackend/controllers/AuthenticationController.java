@@ -20,8 +20,8 @@ public class AuthenticationController {
     private final IAuthenticationServices authenticationService;
 
     @GetMapping(Endpoints.AUTH_REGISTER)
-    public String registerView() throws ExecutionException, InterruptedException {
-        return "<h1>Register Page</h1> <style>h1{color: blue;}</style><script>alert(\"it works!\")</script>";
+    public String registerView() {
+        return "<h1>Register Page</h1> <style>h1{color: blue;}</style>";
     }
 
     @PostMapping(Endpoints.AUTH_AUTHENTICATE)

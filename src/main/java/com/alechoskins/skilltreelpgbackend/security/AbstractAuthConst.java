@@ -11,6 +11,5 @@ public final class AbstractAuthConst {
         public final String USER_CREATE = "USER_CREATE";
         public final String USER_UPDATE = "USER_UPDATE";
         public final String USER_DELETE = "USER_DELETE";
-
     }
 }

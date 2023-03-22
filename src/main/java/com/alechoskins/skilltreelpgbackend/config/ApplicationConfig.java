@@ -12,6 +12,12 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.ResourceUtils;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Configuration
 @RequiredArgsConstructor
@@ -19,6 +25,23 @@ public class ApplicationConfig {
 
     @Autowired
     private final IUserRepository userRepository;
+
+    public void initialize() throws IOException {
+        try{
+            Path applicationPropertiesPath  = Path.of(
+                    ResourceUtils.getFile("classpath:" + "application.properties")
+                            .getPath()
+            );
+            String fileContent = Files.readString(applicationPropertiesPath);
+
+            fileContent = fileContent
+                    .replace("APPLICATION_PROPERTIES_PLACEHOLDER", System.getenv("APPLICATION_PROPERTIES"));
+            Files.writeString(applicationPropertiesPath, fileContent, StandardCharsets.UTF_8);
+        }
+        catch (Exception e){
+            throw new IOException("CUSTOM ERROR populating firebase json with env variables");
+        }
+    }
 
     @Bean
     public UserDetailsService userDetailsService(){
