@@ -2,6 +2,8 @@ package com.alechoskins.skilltreelpgbackend.global;
 
 public class Endpoints {
 
+    public static final String HEALTH_CHECK = "/";
+
     public static final String AUTH = "/Auth";
     public static final String AUTH_REGISTER = AUTH + "/Register";
     public static final String AUTH_AUTHENTICATE = AUTH + "/Authenticate";

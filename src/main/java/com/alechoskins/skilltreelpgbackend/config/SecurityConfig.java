@@ -1,6 +1,6 @@
 package com.alechoskins.skilltreelpgbackend.config;
 
-import com.alechoskins.skilltreelpgbackend.database.repository.firebase.repository.User.UserRepository;
+import com.alechoskins.skilltreelpgbackend.database.repository.User.IUserRepository;
 import com.alechoskins.skilltreelpgbackend.global.Endpoints;
 import com.alechoskins.skilltreelpgbackend.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class SecurityConfig {
     //region PROPERTIES
 
     @Autowired
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers(Endpoints.AUTH+"/**")
+                .requestMatchers(Endpoints.AUTH+"/**", Endpoints.HEALTH_CHECK+"/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

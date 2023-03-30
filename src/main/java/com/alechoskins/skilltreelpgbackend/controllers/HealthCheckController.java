@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HealthCheckController {
-    @GetMapping("/unsecured")
-    public String unsecured() {
-        return "Hello, world!";
+    @GetMapping("/")
+    public String healthCheck() {
+        return "";
     }
 
     @GetMapping("/secured")

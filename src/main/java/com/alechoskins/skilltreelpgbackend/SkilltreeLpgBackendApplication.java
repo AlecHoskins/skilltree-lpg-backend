@@ -14,3 +14,4 @@ public class SkilltreeLpgBackendApplication {
 		SpringApplication.run(SkilltreeLpgBackendApplication.class, args);
 	}
 }
+

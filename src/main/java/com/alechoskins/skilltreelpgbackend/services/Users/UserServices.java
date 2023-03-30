@@ -1,19 +1,17 @@
 package com.alechoskins.skilltreelpgbackend.services.Users;
 
 import com.alechoskins.skilltreelpgbackend.database.pojos.User;
-import com.alechoskins.skilltreelpgbackend.database.repository.firebase.repository.User.IUserRepository;
+import com.alechoskins.skilltreelpgbackend.database.repository.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserServices implements IUserServices {
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     public User findByUsername(String username) {

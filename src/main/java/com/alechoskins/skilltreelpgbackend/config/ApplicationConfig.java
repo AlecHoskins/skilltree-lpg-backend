@@ -1,6 +1,6 @@
 package com.alechoskins.skilltreelpgbackend.config;
 
-import com.alechoskins.skilltreelpgbackend.database.repository.firebase.repository.User.IUserRepository;
+import com.alechoskins.skilltreelpgbackend.database.repository.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,24 +24,7 @@ import java.nio.file.Path;
 public class ApplicationConfig {
 
     @Autowired
-    private final IUserRepository userRepository;
-
-    public void initialize() throws IOException {
-        try{
-            Path applicationPropertiesPath  = Path.of(
-                    ResourceUtils.getFile("classpath:" + "application.properties")
-                            .getPath()
-            );
-            String fileContent = Files.readString(applicationPropertiesPath);
-
-            fileContent = fileContent
-                    .replace("APPLICATION_PROPERTIES_PLACEHOLDER", System.getenv("APPLICATION_PROPERTIES"));
-            Files.writeString(applicationPropertiesPath, fileContent, StandardCharsets.UTF_8);
-        }
-        catch (Exception e){
-            throw new IOException("CUSTOM ERROR populating firebase json with env variables");
-        }
-    }
+    private final UserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService(){
