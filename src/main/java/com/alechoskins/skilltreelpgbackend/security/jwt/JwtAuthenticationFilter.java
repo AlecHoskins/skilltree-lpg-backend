@@ -1,17 +1,17 @@
 package com.alechoskins.skilltreelpgbackend.security.jwt;
 
 import com.alechoskins.skilltreelpgbackend.services.Jwt.JwtServices;
-import com.google.firebase.database.annotations.NotNull;
+import com.alechoskins.skilltreelpgbackend.services.Users.UserServices;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -24,13 +24,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private final JwtServices jwtServices;
     @Autowired
-    private final UserDetailsService userDetailsService;
+    private final UserServices userService;
 
     @Override
     protected void doFilterInternal(
-            @NotNull HttpServletRequest request,
-            @NotNull HttpServletResponse response,
-            @NotNull FilterChain filterChain
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         final String authenticationHeader = request.getHeader("Authorization");
         final String token;
@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         token = authenticationHeader.substring(7);
         userEmail = jwtServices.extractUsername(token);
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+            UserDetails userDetails = this.userService.findByUsername(userEmail);
             if(jwtServices.isTokenValid(token, userDetails)){
                 var authToken = new  UsernamePasswordAuthenticationToken(
                         userDetails,

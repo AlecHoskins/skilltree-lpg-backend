@@ -16,8 +16,13 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-<!--	<packaging>war</packaging>-->
+
 	<dependencies>
+<!--spring stuff-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -35,14 +40,23 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- validation -->
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>8.0.0.Final</version>
+		</dependency>
 
-<!--		security-->
+		<!--		security-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-<!--		spring test-->
-
 	<!--JWT-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -60,12 +74,11 @@
 			<version>0.11.5</version>
 		</dependency>
 
-	<!--FIREBASE-->
-		<!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
+		<!--postgreSQL-->
 		<dependency>
-			<groupId>com.google.firebase</groupId>
-			<artifactId>firebase-admin</artifactId>
-			<version>9.1.1</version>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
 		</dependency>
 
 		<dependency>

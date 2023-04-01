@@ -1,6 +1,6 @@
 package com.alechoskins.skilltreelpgbackend.config;
 
-import com.alechoskins.skilltreelpgbackend.database.repository.User.UserRepository;
+import com.alechoskins.skilltreelpgbackend.database.repository.User.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,29 +10,26 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.ResourceUtils;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
     @Autowired
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService(){
         return  username -> {
-            try {
-                return userRepository.getAllWhere("username",username).get(0);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            var user = userRepository.findByUsername(username).orElse(null);
+            if(user != null){
+                return userRepository.findByUsername(username).orElse(null);
+            }
+            else{
+                throw new UsernameNotFoundException("Username not found");
             }
         };
     }

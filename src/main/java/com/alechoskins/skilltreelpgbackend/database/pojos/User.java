@@ -1,30 +1,58 @@
 package com.alechoskins.skilltreelpgbackend.database.pojos;
 
 import com.alechoskins.skilltreelpgbackend.global.AppEnums;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "skilltree_lpg_user")
 public class User implements UserDetails {
 
+    //region PROPERTIES
+
+    @Setter(AccessLevel.NONE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
+    private Long id;
+    @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = true)
     private String email;
+    @Column(name = "isActive", nullable = false)
     private boolean isActive;
-    private ArrayList<AppEnums.Role> roles;
+
+    //endregion
+
+    //region RELATIONSHIPS
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
+
+    //endregion
+
+    //region METHODS
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(roles != null){
             return roles.stream().map(
-                    x -> new SimpleGrantedAuthority( x.getValue() )
+                    x -> new SimpleGrantedAuthority( x.getName() )
             ).toList();
         }
         return null;
@@ -49,4 +77,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isActive;
     }
+
+    //endregion
 }

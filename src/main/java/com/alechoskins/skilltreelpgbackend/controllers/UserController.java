@@ -13,12 +13,12 @@ public class UserController {
     private UserServices userServices;
 
     @GetMapping(Endpoints.USER_GET)
-    public User getUser(@PathVariable String id) {
+    public User getUser(@PathVariable Long id) {
         return userServices.findById(id);
     }
 
     @GetMapping(Endpoints.USER_GET_ALL)
-    public User getAllUsers(@PathVariable String id) {
+    public User getAllUsers(@PathVariable Long id) {
         return userServices.findById(id);
     }
 

@@ -1,13 +1,13 @@
 package com.alechoskins.skilltreelpgbackend.global;
 
 public final class AppEnums {
-    public enum Role {
+    public enum RoleNames {
         USER("USER"),
         ADMIN("ADMIN");
 
         private final String value;
 
-        Role(String value) {
+        RoleNames(String value) {
             this.value = value;
         }
         //potentially can delete these getValues
