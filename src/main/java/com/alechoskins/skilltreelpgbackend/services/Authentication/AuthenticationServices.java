@@ -42,7 +42,10 @@ public class AuthenticationServices implements IAuthenticationServices {
                     .username(request.getUsername())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
-                    .isActive(true)
+                    .isEnabled(true)
+                    .isAccountNonLocked(true)
+                    .isCredentialsNonExpired(true)
+                    .isAccountNonExpired(true)
                     .roles(roles)
                     .build();
             var createdUser = userServices.create(user);

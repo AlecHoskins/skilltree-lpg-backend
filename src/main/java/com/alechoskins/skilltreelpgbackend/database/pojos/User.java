@@ -1,12 +1,11 @@
 package com.alechoskins.skilltreelpgbackend.database.pojos;
 
-import com.alechoskins.skilltreelpgbackend.global.AppEnums;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "skilltree_lpg_user")
+@Table(name = "stl_user")
 public class User implements UserDetails {
 
     //region PROPERTIES
@@ -29,11 +28,16 @@ public class User implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = true)
     private String email;
-    @Column(name = "isActive", nullable = false)
-    private boolean isActive;
 
+    @Column(nullable = true)
+    private boolean isAccountNonExpired;
+    @Column(nullable = true)
+    private boolean isAccountNonLocked;
+    @Column(nullable = true)
+    private boolean isCredentialsNonExpired;
+    @Column(nullable = true)
+    private boolean isEnabled;
     //endregion
 
     //region RELATIONSHIPS
@@ -60,22 +64,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return isCredentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return isEnabled;
     }
 
     //endregion
