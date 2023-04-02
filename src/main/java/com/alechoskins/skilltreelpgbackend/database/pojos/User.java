@@ -30,13 +30,13 @@ public class User implements UserDetails {
     private String password;
     private String email;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private boolean isAccountNonExpired;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private boolean isAccountNonLocked;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private boolean isCredentialsNonExpired;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private boolean isEnabled;
     //endregion
 

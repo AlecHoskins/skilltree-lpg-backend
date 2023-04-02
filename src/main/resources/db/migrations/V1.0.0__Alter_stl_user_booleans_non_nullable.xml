@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="1.0.0_alter_stl_user_boolean_columns" author="alec-hoskins">
+        <preConditions onFail="HALT">
+            <tableExists tableName="stl_user"/>
+        </preConditions>
+        <sql splitStatements="true">
+            ALTER TABLE stl_user ALTER COLUMN is_account_non_expired SET NOT NULL;
+            ALTER TABLE stl_user ALTER COLUMN is_account_non_locked SET NOT NULL;
+            ALTER TABLE stl_user ALTER COLUMN is_credentials_non_expired SET NOT NULL;
+            ALTER TABLE stl_user ALTER COLUMN is_enabled SET NOT NULL;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
